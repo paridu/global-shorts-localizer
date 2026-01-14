@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-inference-worker
+  namespace: globalvoice-prod
+  labels:
+    app: inference-engine
+    tier: worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: inference-engine
+  template:
+    metadata:
+      labels:
+        app: inference-engine
+    spec:
+      containers:
+      - name: worker
+        image: globalvoice/inference-worker:latest
+        resources:
+          limits:
+            nvidia.com/gpu: 1 # Request 1 GPU per pod
+            memory: "16Gi"
+            cpu: "4"
+          requests:
+            nvidia.com/gpu: 1
+            memory: "8Gi"
+            cpu: "2"
+        env:
+        - name: REDIS_URL
+          value: "redis://redis-master:6379"
+        - name: MODEL_CACHE_DIR
+          value: "/mnt/models"
+        volumeMounts:
+        - name: model-storage
+          mountPath: /mnt/models
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-pvc
+      nodeSelector:
+        accelerator: nvidia-l4 # Target specific GPU instances
