@@ -1,0 +1,32 @@
+{
+  "platform": "Global Content Expansion AI",
+  "version": "2.0.0",
+  "currency": "USD",
+  "tier_logic": {
+    "starter": {
+      "id": "tier_001",
+      "monthly_cost": 0,
+      "minutes_included": 10,
+      "features": ["standard_voice", "15_languages"],
+      "target_group": "Hobbyist"
+    },
+    "creator": {
+      "id": "tier_002",
+      "monthly_cost": 29,
+      "minutes_included": 120,
+      "features": ["emotional_prosody", "lip_sync", "all_languages", "priority_queue"],
+      "target_group": "Professional YouTubers"
+    },
+    "empire": {
+      "id": "tier_003",
+      "monthly_cost": 149,
+      "minutes_included": 1000,
+      "features": ["custom_voice_cloning", "bulk_metadata_seo", "dedicated_support"],
+      "target_group": "MCNs & Production Houses"
+    }
+  },
+  "scaling_factor": {
+    "compute_cost_optimization": 0.15,
+    "revenue_share_model_enabled": false
+  }
+}
