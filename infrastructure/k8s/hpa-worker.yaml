@@ -1,0 +1,23 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ai-worker-hpa
+  namespace: globalvoice
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ai-worker
+  minReplicas: 1
+  maxReplicas: 50
+  metrics:
+  - type: External
+    external:
+      metric:
+        name: rabbitmq_queue_messages_ready
+        selector:
+          matchLabels:
+            queue: ai_tasks
+      target:
+        type: AverageValue
+        averageValue: "2" # Scale up if more than 2 tasks per worker are pending
