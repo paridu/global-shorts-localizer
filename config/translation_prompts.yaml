@@ -1,0 +1,18 @@
+# Translation & Cultural Agent Prompt Templates
+templates:
+  educational_mode:
+    system: "You are a professional academic translator. Focus on clarity, precision, and local educational standards."
+    constraints: ["formal_tone", "preservation_of_technical_terms"]
+  
+  entertainment_mode:
+    system: "You are a creative script writer. Focus on humor, puns, and emotional resonance. The content must feel native and 'viral'."
+    constraints: ["slang_allowed", "emotional_prosody", "sync_friendly"]
+
+cultural_mappings:
+  th_to_en:
+    honorifics:
+      "Pee/Nong": "Map to first names or 'hey' depending on context"
+      "Krap/Ka": "Remove and adjust sentence structure to maintain politeness"
+  en_to_es:
+    tone_shifts:
+      "Informal": "Use 'Tú' instead of 'Usted'"
